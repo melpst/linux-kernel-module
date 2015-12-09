@@ -40,7 +40,14 @@ int birthday_list_init(void){
 }
 
 void birthday_list_exit(void){
+	struct birthday *ptr, *next;
+	
+	list_for_each_entry_safe(ptr, next, &birthday_list, list){
+		printk(KERN_INFO "Deleting node.\n");
+
+		list_del(&ptr->list);
+		kfree(ptr);
+	}
+
 	printk(KERN_INFO "Removing Module.\n");
 }
-
-
