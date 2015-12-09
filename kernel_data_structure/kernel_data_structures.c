@@ -43,7 +43,7 @@ void birthday_list_exit(void){
 	struct birthday *ptr, *next;
 	
 	list_for_each_entry_safe(ptr, next, &birthday_list, list){
-		printk(KERN_INFO "Deleting node.\n");
+		printk(KERN_INFO "Freeing node.\n");
 
 		list_del(&ptr->list);
 		kfree(ptr);
@@ -51,3 +51,10 @@ void birthday_list_exit(void){
 
 	printk(KERN_INFO "Removing Module.\n");
 }
+
+module_init(birthday_list_init);
+module_exit(birthday_list_exit);
+
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("Kernel Data Structure");
+MODULE_AUTHOR("Jitlada Supreeyaporn");
